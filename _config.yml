@@ -1,6 +1,12 @@
 title: 소 잃고 외양간 고치는 사람
 description: AxPlank의 블로그
-remote_theme: vaibhavvikas/jekyll-theme-minimalistic
+remote_theme: yaoyao-liu/minimal-light
 plugins:
   - jekyll-remote-theme
-color-scheme: dark  # auto/light/dark 선택
+
+# minimal-light 테마 설정 (밝은 다크 모드 활성화)
+auto_dark_mode: true  # 자동 라이트/다크 전환 (prefers-color-scheme 기준)
+enable_footnote: false  # 푸터 표시
+
+# 추가 커스텀 (필요시)
+# font: "Sans Serif"  # Serif 또는 Sans Serif
