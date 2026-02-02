@@ -55,3 +55,159 @@ pre {
     z-index: 20 !important;
   }
 }
+
+// Rouge 코드 블록 래퍼
+.highlighter-rouge {
+  margin: 16px 0 !important;
+}
+
+// 하이라이트 래퍼
+.highlight {
+  position: relative !important;
+  background: linear-gradient(180deg, #1f1f1f 0%, #121212 100%) !important;
+  border: 1px solid #333 !important;
+  border-radius: 10px !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4) !important;
+  overflow: hidden !important;
+
+  // 타이틀 바
+  &::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 32px !important;
+    background: linear-gradient(90deg, #272727 0%, #2d2d2d 50%, #282828 100%) !important;
+    border-radius: 10px 10px 0 0 !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.03) !important;
+    z-index: 10 !important;
+  }
+
+  // 3개 점 (빨강, 노랑, 초록)
+  &::after {
+    --dot-size: 12px;
+    --dot-gap: 10px;
+    content: '' !important;
+    position: absolute !important;
+    top: 10px !important;
+    left: 16px !important;
+    width: calc(var(--dot-size) * 3 + var(--dot-gap) * 2) !important;
+    height: var(--dot-size) !important;
+    background: 
+      radial-gradient(circle at calc(var(--dot-size) / 2) 50%, #fe5f58 0%, #fe5f58 calc(var(--dot-size) / 2), transparent calc(var(--dot-size) / 2)),
+      radial-gradient(circle at calc(var(--dot-size) / 2 + var(--dot-size) + var(--dot-gap)) 50%, #febc2e 0%, #febc2e calc(var(--dot-size) / 2), transparent calc(var(--dot-size) / 2)),
+      radial-gradient(circle at calc(var(--dot-size) / 2 + (var(--dot-size) + var(--dot-gap)) * 2) 50%, #28c840 0%, #28c840 calc(var(--dot-size) / 2), transparent calc(var(--dot-size) / 2))
+    !important;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)) !important;
+    z-index: 20 !important;
+  }
+
+  pre {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 40px 20px 24px 20px !important;
+    font-family: 'SF Mono', Monaco, 'Roboto Mono', monospace !important;
+    overflow-x: auto !important;
+
+    // 기존 pre의 가상 요소 제거
+    &::before, &::after {
+      display: none !important;
+    }
+  }
+
+  code {
+    display: block !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 0 0 60px !important;
+    font-family: inherit !important;
+    color: #D4D4D4 !important;
+    line-height: 1.6 !important;
+    counter-reset: line !important;
+    position: relative !important;
+    white-space: pre !important;
+
+    // CSS 카운터로 라인 번호 생성
+    & .highlight-line,
+    & > span,
+    & > .line {
+      display: block !important;
+      counter-increment: line !important;
+      position: relative !important;
+      
+      &::before {
+        content: counter(line) !important;
+        position: absolute !important;
+        left: -60px !important;
+        width: 40px !important;
+        padding-right: 16px !important;
+        text-align: right !important;
+        color: #858585 !important;
+        border-right: 1px solid #333 !important;
+        user-select: none !important;
+        font-weight: 600 !important;
+      }
+    }
+  }
+}
+
+// VSCode Dark (Visual Studio - C/C++) 테마 구문 강조 색상
+.highlight {
+  // 키워드 (const, if, return, function, class 등)
+  .k, .kd, .kn, .kp, .kr, .kt { color: #569CD6 !important; }
+  
+  // 문자열
+  .s, .s1, .s2, .sb, .sc, .sd, .se, .sh, .si, .sx { color: #CE9178 !important; }
+  
+  // 숫자
+  .m, .mf, .mh, .mi, .mo, .il { color: #B5CEA8 !important; }
+  
+  // 주석
+  .c, .c1, .cm, .cp, .cs { color: #6A9955 !important; }
+  
+  // 함수/메서드 이름
+  .nf, .fm { color: #DCDCAA !important; }
+  
+  // 변수/식별자
+  .n, .nx, .py, .nv, .vi, .vg { color: #9CDCFE !important; }
+  
+  // 클래스/타입 이름
+  .nc, .nn, .no { color: #4EC9B0 !important; }
+  
+  // 연산자
+  .o, .ow { color: #D4D4D4 !important; }
+  
+  // 정규표현식
+  .sr { color: #D16969 !important; }
+  
+  // 특수 키워드 (this, self, super 등)
+  .bp, .vc { color: #C586C0 !important; }
+  
+  // 속성/프로퍼티
+  .na { color: #9CDCFE !important; }
+  
+  // 내장 함수
+  .nb { color: #DCDCAA !important; }
+  
+  // HTML/XML 태그
+  .nt { color: #569CD6 !important; }
+  
+  // 불린/null 상수
+  .kc { color: #569CD6 !important; }
+  
+  // 에러
+  .err { color: #F44747 !important; }
+}
+
+// 인라인 코드 (`) 스타일
+code.highlighter-rouge {
+  background-color: #2d2d2d !important;
+  color: #CE9178 !important;
+  padding: 2px 6px !important;
+  border-radius: 3px !important;
+  font-family: 'SF Mono', Monaco, 'Roboto Mono', monospace !important;
+  font-size: 0.9em !important;
+}
