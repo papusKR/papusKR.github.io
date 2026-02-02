@@ -152,6 +152,54 @@ pre {
       }
     }
   }
+  table {
+    border-spacing: 0 !important;
+    border-collapse: collapse !important;
+    margin: 0 !important;
+    width: 100% !important;
+  }
+
+  // 테이블 행
+  tr {
+    border: none !important;
+  }
+
+  // 테이블 셀
+  td {
+    border: none !important;
+    padding: 0 !important;
+  }
+
+  // 라인 번호 셀
+  .rouge-gutter,
+  .linenos,
+  td.linenos {
+    width: 40px !important;
+    padding: 0 16px 0 0 !important;
+    text-align: right !important;
+    border-right: 1px solid #333 !important;
+    user-select: none !important;
+    
+    pre {
+      padding: 0 !important;
+      margin: 0 !important;
+      color: #858585 !important;
+      font-weight: 600 !important;
+    }
+  }
+
+  // 코드 내용 셀
+  .rouge-code,
+  .code,
+  td.code {
+    padding: 0 0 0 20px !important;
+    width: 100% !important;
+    
+    pre {
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+  }
 }
 
 // VSCode Dark (Visual Studio - C/C++) 테마 구문 강조 색상
