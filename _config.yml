@@ -1,7 +1,36 @@
+# Site settings
+lang: ko-KR
+logo: /assets/img/logo-placeholder.png
+
+# Sidebar (SL) profile
+name: "papusKR"
+role: "Security & Network Engineer"
+
+description: "보안과 네트워크를 중심으로 한 포트폴리오와 기술 블로그입니다."
+
+# Platforms (social links)
+platforms:
+  - name: "GitHub"
+    link: "https://github.com/papusKR"
+    icon: "🐱"
+  - name: "LinkedIn"
+    link: "https://www.linkedin.com/" # TODO: update with real profile URL
+    icon: "🔗"
+
+# Navigation (sidebar menu)
+navigation:
+  - name: "Home"
+    link: "/"
+  - name: "Portfolio"
+    link: "/portfolio/"
+  - name: "Blog"
+    link: "/blog/"
+  - name: "About"
+    link: "/about/"
+
 remote_theme: vaibhavvikas/jekyll-theme-minimalistic
 plugins:
   - jekyll-remote-theme
-
 
 kramdown:
   syntax_highlighter: rouge
