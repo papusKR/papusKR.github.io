@@ -1,0 +1,32 @@
+<div class="link-wrapper">
+  {%- comment -%}
+  Navigation menu first (moved to top)
+  {%- endcomment -%}
+  {% if site.navigation %}
+  <h3 class="sidebar-h3">Contents:</h3>
+  <ul class="content">
+  {%- for item in site.navigation %}
+    <li><a href="{{ item.link }}">{{ item.name }}</a>
+        {% if item.sublist %}
+        <ul class="sublist">
+            {%- for subitem in item.sublist %}
+            <li><a href="{{ subitem.link }}">{{ subitem.name }}</a></li>
+            {%- endfor %}
+        </ul>
+        {% endif %}
+    </li>
+  {%- endfor %}
+  </ul>
+  {% endif %}
+
+  {%- comment -%}
+  Platforms (social links) second (moved to bottom)
+  {%- endcomment -%}
+  {% if site.platforms %}
+  <ul class="link">
+    {%- for platform in site.platforms %}
+    <li><a href="{{ platform.link }}">{{ platform.icon }}&nbsp;{{ platform.name }}</a></li>
+    {%- endfor %}
+  </ul>
+  {% endif %}
+</div>
