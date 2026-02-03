@@ -8,16 +8,7 @@ role: "Security & Network Engineer"
 
 description: "보안과 네트워크를 중심으로 한 포트폴리오와 기술 블로그입니다."
 
-# Platforms (social links)
-platforms:
-  - name: "GitHub"
-    link: "https://github.com/papusKR"
-    icon: "🐱"
-  - name: "LinkedIn"
-    link: "#"  # TODO: Add LinkedIn profile URL later
-    icon: "🔗"
-
-# Navigation (sidebar menu)
+# Navigation (sidebar menu) - moved to top
 navigation:
   - name: "Home"
     link: "/"
@@ -27,6 +18,15 @@ navigation:
     link: "/blog/"
   - name: "About"
     link: "/about/"
+
+# Platforms (social links) - moved to bottom
+platforms:
+  - name: "GitHub"
+    link: "#"  # TODO: Add GitHub profile URL later
+    icon: "🐱"
+  - name: "LinkedIn"
+    link: "#"  # TODO: Add LinkedIn profile URL later
+    icon: "🔗"
 
 remote_theme: vaibhavvikas/jekyll-theme-minimalistic
 plugins:
