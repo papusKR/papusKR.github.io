@@ -1,6 +1,6 @@
 # Site settings
 lang: ko-KR
-logo: /assets/img/logo-placeholder.png
+# logo: /assets/img/logo-placeholder.png  # TODO: Add logo later
 
 # Sidebar (SL) profile
 name: "papusKR"
@@ -14,7 +14,7 @@ platforms:
     link: "https://github.com/papusKR"
     icon: "🐱"
   - name: "LinkedIn"
-    link: "https://www.linkedin.com/" # TODO: update with real profile URL
+    link: "#"  # TODO: Add LinkedIn profile URL later
     icon: "🔗"
 
 # Navigation (sidebar menu)
