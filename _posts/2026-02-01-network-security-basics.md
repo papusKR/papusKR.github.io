@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "네트워크 보안 기초"
+title: "Test"
 date: 2026-02-01
 categories: [Security, Network]
 tags: [firewall, network, security]
@@ -31,4 +31,5 @@ IDS는 네트워크에서 악의적인 활동을 탐지합니다.
 가상 사설망을 통해 안전한 원격 접속을 제공합니다.
 
 ## 결론
+
 네트워크 보안은 지속적인 모니터링과 업데이트가 필요합니다.
