@@ -10,6 +10,29 @@ body, html {
   background-color: #1e1e1e !important;
 }
 
+// 전체 래퍼와 섹션 너비 증가 (33% 증가)
+.wrapper {
+  max-width: 1200px !important; // 기본 900px에서 1200px로 증가
+  width: 95% !important;
+}
+
+section {
+  max-width: 800px !important; // 기본 600px에서 800px로 증가
+  width: calc(100% - 320px) !important; // 사이드바 너비 고려
+}
+
+// 반응형 - 모바일에서도 적용
+@media print, screen and (max-width: 960px) {
+  .wrapper {
+    width: 95% !important;
+  }
+  
+  section {
+    width: 100% !important;
+    max-width: none !important;
+  }
+}
+
 pre {
   --dot-size: 12px;
   --dot-gap: 10px;
