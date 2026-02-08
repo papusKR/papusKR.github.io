@@ -32,6 +32,13 @@ section {
   }
 }
 
+// "View My Github Profile" 버튼 숨기기
+.btn-github,
+a[href*="github.com"][class*="btn"],
+.sidebar a[href*="github.com"]:not(.link a) {
+  display: none !important;
+}
+
 // 반응형 - 모바일에서도 적용
 @media print, screen and (max-width: 960px) {
   .wrapper {
