@@ -21,8 +21,10 @@ section {
   width: calc(100% - 320px) !important; // 사이드바 너비 고려
 }
 
-// 사이드바 타이틀 자동 줄바꿈 설정
+// 사이드바 상단 정렬 조정
 .sidebar, header {
+  margin-top: 2rem !important;
+  
   h1, h2, h3, .project-name, a {
     word-wrap: break-word !important;
     word-break: break-word !important;
@@ -48,6 +50,10 @@ a[href*="github.com"][class*="btn"],
   section {
     width: 100% !important;
     max-width: none !important;
+  }
+  
+  .sidebar, header {
+    margin-top: 0 !important;
   }
 }
 
