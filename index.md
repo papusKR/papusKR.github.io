@@ -17,11 +17,9 @@ title: Home
 - Penetration Testing
 - Infrastructure Design
 - Security Analysis
+- Docker & Kubernetes
+- DevSecOps
 
-## Latest Projects
+---
 
-프로젝트 내용이 여기에 표시됩니다.
-
-## Recent Blog Posts
-
-보안 및 네트워크 관련 최신 기술 블로그 글이 여기에 표시됩니다.
+{% include gallery.html limit=6 %}
