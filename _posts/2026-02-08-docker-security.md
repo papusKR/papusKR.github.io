@@ -2,9 +2,9 @@
 layout: post
 title: "Test"
 date: 2026-02-08
-categories: [DevOps, Security]
+categories: [Cloud, Security]
 tags: [docker, container, devops, security]
-description: "Docker 컨테이너 환경에서의 보안 모범 사례를 알아봅니다."
+description: "Docker 컨테이너 환경에서의 보안 모범 사례를 알아봰5니다."
 image: "/assets/img/posts/docker-security.jpg"
 ---
 
