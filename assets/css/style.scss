@@ -21,6 +21,17 @@ section {
   width: calc(100% - 320px) !important; // 사이드바 너비 고려
 }
 
+// 사이드바 타이틀 자동 줄바꿈 설정
+.sidebar, header {
+  h1, h2, h3, .project-name, a {
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    hyphens: auto !important;
+    white-space: normal !important;
+  }
+}
+
 // 반응형 - 모바일에서도 적용
 @media print, screen and (max-width: 960px) {
   .wrapper {
