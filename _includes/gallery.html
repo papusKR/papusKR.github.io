@@ -1,0 +1,87 @@
+<div class="notion-gallery">
+  <div class="gallery-header">
+    <h2 class="gallery-title">{{ include.title | default: "Recent Posts" }}</h2>
+    <div class="gallery-filters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="Security">Security</button>
+      <button class="filter-btn" data-filter="Network">Network</button>
+      <button class="filter-btn" data-filter="DevOps">DevOps</button>
+    </div>
+  </div>
+  
+  <div class="gallery-grid">
+    {% assign posts = site.posts | sort: 'date' | reverse %}
+    {% for post in posts limit: include.limit %}
+    <article class="gallery-card" data-categories="{{ post.categories | join: ' ' }}">
+      <a href="{{ post.url | relative_url }}" class="card-link">
+        {% if post.image %}
+        <div class="card-cover" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+          <div class="card-cover-overlay">
+            <span class="card-icon">📄</span>
+          </div>
+        </div>
+        {% else %}
+        <div class="card-cover" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+          <div class="card-cover-overlay">
+            <span class="card-icon">📄</span>
+          </div>
+        </div>
+        {% endif %}
+        
+        <div class="card-content">
+          <h3 class="card-title">{{ post.title }}</h3>
+          
+          {% if post.description %}
+          <p class="card-description">{{ post.description | truncate: 100 }}</p>
+          {% else %}
+          <p class="card-description">{{ post.excerpt | strip_html | truncate: 100 }}</p>
+          {% endif %}
+          
+          <div class="card-meta">
+            <div class="card-tags">
+              {% for category in post.categories limit: 2 %}
+              <span class="card-tag">{{ category }}</span>
+              {% endfor %}
+            </div>
+            <time class="card-date" datetime="{{ post.date | date_to_xmlschema }}">
+              {{ post.date | date: "%Y.%m.%d" }}
+            </time>
+          </div>
+        </div>
+      </a>
+    </article>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+// Gallery filter functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.gallery-card');
+  
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      // Update active state
+      filterBtns.forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      
+      const filter = this.dataset.filter;
+      
+      // Filter cards
+      cards.forEach(card => {
+        if (filter === 'all') {
+          card.style.display = 'block';
+        } else {
+          const categories = card.dataset.categories;
+          if (categories.includes(filter)) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        }
+      });
+    });
+  });
+});
+</script>
