@@ -26,27 +26,40 @@
         <div class="bl-container">
           <h1 class="bl-title">{{ page.title }}</h1>
           
-          <!-- BL Category Filter -->
-          <div class="bl-filter-container">
-            <button class="bl-filter-btn active" data-category="all">All</button>
-            {% assign all_categories = "" | split: "" %}
-            {% for post in site.posts %}
-              {% for category in post.categories %}
-                {% unless all_categories contains category %}
-                  {% assign all_categories = all_categories | push: category %}
-                {% endunless %}
+          <!-- BL Main Category Filter -->
+          <div class="bl-filter-section">
+            <div class="bl-filter-label">Main Category</div>
+            <div class="bl-filter-container" id="mainCategoryFilter">
+              <button class="bl-filter-btn active" data-main-category="all">All</button>
+              {% assign main_categories = "" | split: "" %}
+              {% for post in site.posts %}
+                {% for category in post.categories %}
+                  {% assign cat_parts = category | split: "/" %}
+                  {% assign main_cat = cat_parts[0] %}
+                  {% unless main_categories contains main_cat %}
+                    {% assign main_categories = main_categories | push: main_cat %}
+                  {% endunless %}
+                {% endfor %}
               {% endfor %}
-            {% endfor %}
-            {% assign sorted_categories = all_categories | sort %}
-            {% for category in sorted_categories %}
-              <button class="bl-filter-btn" data-category="{{ category }}">{{ category }}</button>
-            {% endfor %}
+              {% assign sorted_main_categories = main_categories | sort %}
+              {% for main_cat in sorted_main_categories %}
+                <button class="bl-filter-btn" data-main-category="{{ main_cat }}">{{ main_cat }}</button>
+              {% endfor %}
+            </div>
+          </div>
+          
+          <!-- BL Sub Category Filter -->
+          <div class="bl-filter-section" id="subCategorySection" style="display: none;">
+            <div class="bl-filter-label">Sub Category</div>
+            <div class="bl-filter-container" id="subCategoryFilter">
+              <!-- Sub categories will be populated dynamically -->
+            </div>
           </div>
 
           <div class="bl-posts-grid" id="postsGrid">
             {% assign sorted_posts = site.posts | sort: 'date' | reverse %}
             {% for post in sorted_posts %}
-              <article class="bl-post-card" data-categories="{{ post.categories | join: ',' }}">
+              <article class="bl-post-card" data-categories="{{ post.categories | join: '|' }}">
                 <a href="{{ post.url | relative_url }}" class="bl-post-link">
                   <div class="bl-post-thumbnail">
                     {% if post.image %}
@@ -131,13 +144,28 @@
       color: #24292e;
     }
     
-    /* BL Filter */
+    /* BL Filter Section */
+    .bl-filter-section {
+      margin-bottom: 1.5rem;
+    }
+    
+    .bl-filter-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #586069;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.75rem;
+    }
+    
     .bl-filter-container {
       display: flex;
       gap: 0.75rem;
-      margin-bottom: 2rem;
       flex-wrap: wrap;
-      padding-bottom: 1.5rem;
+      padding-bottom: 1rem;
+    }
+    
+    #mainCategoryFilter {
       border-bottom: 2px solid #e1e4e8;
     }
     
@@ -338,31 +366,128 @@
     </style>
     
     <script>
-    // BL Category Filter
+    // BL 2-Level Category Filter
     document.addEventListener('DOMContentLoaded', function() {
-      const filterBtns = document.querySelectorAll('.bl-filter-btn');
+      const mainCategoryBtns = document.querySelectorAll('#mainCategoryFilter .bl-filter-btn');
+      const subCategorySection = document.getElementById('subCategorySection');
+      const subCategoryFilter = document.getElementById('subCategoryFilter');
       const postCards = document.querySelectorAll('.bl-post-card');
       
-      filterBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-          const category = this.dataset.category;
+      let currentMainCategory = 'all';
+      let currentSubCategory = 'all';
+      
+      // Build category structure
+      const categoryStructure = {};
+      postCards.forEach(card => {
+        const categories = card.dataset.categories.split('|');
+        categories.forEach(fullCategory => {
+          const parts = fullCategory.split('/');
+          const mainCat = parts[0];
+          const subCat = parts[1] || null;
           
-          // Update active button
-          filterBtns.forEach(b => b.classList.remove('active'));
-          this.classList.add('active');
-          
-          // Filter posts
-          postCards.forEach(card => {
-            const categories = card.dataset.categories.split(',');
-            
-            if (category === 'all' || categories.includes(category)) {
-              card.classList.remove('hidden');
-            } else {
-              card.classList.add('hidden');
-            }
-          });
+          if (!categoryStructure[mainCat]) {
+            categoryStructure[mainCat] = new Set();
+          }
+          if (subCat) {
+            categoryStructure[mainCat].add(subCat);
+          }
         });
       });
+      
+      // Main category filter
+      mainCategoryBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          const mainCategory = this.dataset.mainCategory;
+          currentMainCategory = mainCategory;
+          currentSubCategory = 'all';
+          
+          // Update active button
+          mainCategoryBtns.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          
+          // Show/hide sub category section
+          if (mainCategory === 'all') {
+            subCategorySection.style.display = 'none';
+          } else {
+            updateSubCategories(mainCategory);
+            subCategorySection.style.display = 'block';
+          }
+          
+          filterPosts();
+        });
+      });
+      
+      // Update sub categories
+      function updateSubCategories(mainCategory) {
+        subCategoryFilter.innerHTML = '';
+        
+        // Add "All" button
+        const allBtn = document.createElement('button');
+        allBtn.className = 'bl-filter-btn active';
+        allBtn.dataset.subCategory = 'all';
+        allBtn.textContent = 'All';
+        allBtn.addEventListener('click', handleSubCategoryClick);
+        subCategoryFilter.appendChild(allBtn);
+        
+        // Add sub category buttons
+        if (categoryStructure[mainCategory]) {
+          const subCategories = Array.from(categoryStructure[mainCategory]).sort();
+          subCategories.forEach(subCat => {
+            const btn = document.createElement('button');
+            btn.className = 'bl-filter-btn';
+            btn.dataset.subCategory = subCat;
+            btn.textContent = subCat;
+            btn.addEventListener('click', handleSubCategoryClick);
+            subCategoryFilter.appendChild(btn);
+          });
+        }
+      }
+      
+      // Sub category click handler
+      function handleSubCategoryClick() {
+        const subCategory = this.dataset.subCategory;
+        currentSubCategory = subCategory;
+        
+        // Update active button
+        subCategoryFilter.querySelectorAll('.bl-filter-btn').forEach(b => {
+          b.classList.remove('active');
+        });
+        this.classList.add('active');
+        
+        filterPosts();
+      }
+      
+      // Filter posts
+      function filterPosts() {
+        postCards.forEach(card => {
+          const categories = card.dataset.categories.split('|');
+          let shouldShow = false;
+          
+          if (currentMainCategory === 'all') {
+            shouldShow = true;
+          } else {
+            categories.forEach(fullCategory => {
+              const parts = fullCategory.split('/');
+              const mainCat = parts[0];
+              const subCat = parts[1] || null;
+              
+              if (mainCat === currentMainCategory) {
+                if (currentSubCategory === 'all') {
+                  shouldShow = true;
+                } else if (subCat === currentSubCategory) {
+                  shouldShow = true;
+                }
+              }
+            });
+          }
+          
+          if (shouldShow) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+      }
     });
     </script>
   </body>
