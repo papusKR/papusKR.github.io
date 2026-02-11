@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "Test"
+title: "네트워크 보안 기초"
 date: 2026-02-01
-categories: [Network, Security]
+categories: [Network/Security, Security/Firewall]
 tags: [firewall, ids, ips, network-security]
 description: "네트워크 보안의 기본 개념과 주요 기술을 설명합니다."
 image: "/assets/img/posts/network-security.jpg"
