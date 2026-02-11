@@ -21,18 +21,6 @@
   <body>
     <!-- BL (Blog Layout) - Full Width without Sidebar -->
     <div class="bl-wrapper">
-      <!-- BL Header/Navigation -->
-      <header class="bl-header">
-        <div class="bl-nav">
-          <a href="{{ '/' | relative_url }}" class="bl-logo">{{ site.name }}</a>
-          <nav class="bl-menu">
-            {% for item in site.navigation %}
-              <a href="{{ item.link | relative_url }}" class="bl-menu-item">{{ item.name }}</a>
-            {% endfor %}
-          </nav>
-        </div>
-      </header>
-      
       <!-- BL Main Content -->
       <main class="bl-content">
         <div class="bl-container">
@@ -113,52 +101,6 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-    }
-    
-    /* BL Header */
-    .bl-header {
-      background: #fff;
-      border-bottom: 1px solid #e1e4e8;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    }
-    
-    .bl-nav {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    .bl-logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #24292e;
-      text-decoration: none;
-    }
-    
-    .bl-logo:hover {
-      color: #0366d6;
-    }
-    
-    .bl-menu {
-      display: flex;
-      gap: 2rem;
-    }
-    
-    .bl-menu-item {
-      color: #586069;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-    
-    .bl-menu-item:hover {
-      color: #0366d6;
     }
     
     /* BL Main Content */
@@ -318,16 +260,6 @@
     }
     
     @media (max-width: 768px) {
-      .bl-nav {
-        flex-direction: column;
-        gap: 1rem;
-        text-align: center;
-      }
-      
-      .bl-menu {
-        gap: 1rem;
-      }
-      
       .bl-title {
         font-size: 2rem;
       }
