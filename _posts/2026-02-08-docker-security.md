@@ -5,7 +5,6 @@ date: 2026-02-08
 categories: [Cloud, Security]
 tags: [docker, container, devops, security]
 description: "Docker 컨테이너 환경에서의 보안 모범 사례를 알아봰5니다."
-image: "/assets/img/posts/docker-security.jpg"
 ---
 
 # Docker 컨테이너 보안

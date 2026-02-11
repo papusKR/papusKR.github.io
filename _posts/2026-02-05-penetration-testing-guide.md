@@ -2,50 +2,68 @@
 layout: post
 title: "Test"
 date: 2026-02-05
-categories: [Security, Pentesting]
-tags: [pentesting, hacking, security-testing]
-description: "윤리적 해킹과 모의해킹 방법론에 대해 알아봅니다."
-image: "/assets/img/posts/pentesting.jpg"
+categories: [Security, Testing]
+tags: [pentesting, kali-linux, ethical-hacking]
+description: "모의 해킹 테스트의 기본 절차와 방법론을 소개합니다."
 ---
 
-# 모의해킹 가이드
+# 모의 해킹 가이드
 
-모의해킹(Penetration Testing)은 시스템의 취약점을 사전에 발견하기 위한 중요한 보안 활동입니다.
+모의 해킹(Penetration Testing)은 시스템의 보안 취약점을 찾기 위한 승인된 공격 시뮬레이션입니다.
 
-## 모의해킹 단계
+## 테스트 단계
 
-### 1. 정보 수집 (Reconnaissance)
+### 1. 정찰 (Reconnaissance)
 ```bash
-# Nmap을 이용한 포트 스캔
-nmap -sV -sC target.com
+# Nmap 스캔
+nmap -sV -sC -oA scan_results 192.168.1.0/24
 
-# DNS 정보 수집
-dig target.com ANY
+# DNS 열거
+dig example.com ANY
+host -t ns example.com
 ```
 
-### 2. 취약점 분석 (Scanning)
-- 포트 스캔
-- 서비스 버전 확인
-- 취약점 데이터베이스 조회
+### 2. 스캐닝
+```bash
+# 포트 스캔
+nmap -p- --min-rate=1000 -T4 target.com
 
-### 3. 접근 획득 (Gaining Access)
-발견된 취약점을 이용하여 시스템에 접근합니다.
+# 취약점 스캔
+nmap --script vuln target.com
+```
 
-### 4. 권한 상승 (Privilege Escalation)
-일반 사용자 권한을 관리자 권한으로 상승시킵니다.
+### 3. 접근 획득
+```bash
+# Metasploit 사용
+msfconsole
+use exploit/windows/smb/ms17_010_eternalblue
+set RHOSTS 192.168.1.100
+exploit
+```
 
-### 5. 보고서 작성
-발견된 취약점과 해결 방안을 문서화합니다.
+### 4. 권한 상승
+```bash
+# Linux 권한 상승 체크
+sudo -l
+find / -perm -4000 2>/dev/null
+```
 
-## 윤리적 고려사항
+## 주요 도구
 
-- 항상 허가된 범위 내에서만 테스트
-- 법적 계약 필수
-- 데이터 보호 준수
+- **Nmap**: 네트워크 스캐너
+- **Burp Suite**: 웹 취약점 분석
+- **Metasploit**: 익스플로잇 프레임워크
+- **John the Ripper**: 패스워드 크래킹
 
-## 추천 도구
+## 보고서 작성
 
-- Kali Linux
-- Metasploit Framework
-- Burp Suite
-- Wireshark
+1. Executive Summary
+2. 발견된 취약점 목록
+3. 상세 분석
+4. 재현 방법
+5. 위험도 평가
+6. 권장 조치사항
+
+## 결론
+
+모의 해킹은 반드시 승인 하에 수행되어야 하며, 윤리적 해킹 원칙을 준수해야 합니다.
