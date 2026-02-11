@@ -5,6 +5,7 @@ date: 2026-02-05
 categories: [Security, Testing]
 tags: [pentesting, kali-linux, ethical-hacking]
 description: "모의 해킹 테스트의 기본 절차와 방법론을 소개합니다."
+image: "/assets/img/posts/pentesting.jpg"
 ---
 
 # 모의 해킹 가이드
