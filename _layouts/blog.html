@@ -84,7 +84,14 @@
                     {% if post.categories.size > 0 %}
                     <div class="bl-post-categories">
                       {% for category in post.categories limit:2 %}
-                        <span class="bl-category-tag">{{ category }}</span>
+                        {% assign cat_parts = category | split: "/" %}
+                        {% if forloop.first %}
+                          <!-- First category = Main Category -->
+                          <span class="bl-category-tag bl-main-category">{{ cat_parts[0] }}</span>
+                          {% if cat_parts[1] %}
+                            <span class="bl-category-tag bl-sub-category">{{ cat_parts[1] }}</span>
+                          {% endif %}
+                        {% endif %}
                       {% endfor %}
                     </div>
                     {% endif %}
@@ -294,11 +301,23 @@
     .bl-category-tag {
       display: inline-block;
       padding: 0.25rem 0.6rem;
-      background: #f1f8ff;
-      color: #0366d6;
       border-radius: 12px;
       font-size: 0.8rem;
       font-weight: 500;
+    }
+    
+    /* Main Category Style */
+    .bl-main-category {
+      background: #0366d6;
+      color: #fff;
+      font-weight: 600;
+    }
+    
+    /* Sub Category Style */
+    .bl-sub-category {
+      background: #f1f8ff;
+      color: #0366d6;
+      border: 1px solid #c8e1ff;
     }
     
     .bl-no-posts {
