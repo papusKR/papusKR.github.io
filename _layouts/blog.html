@@ -26,16 +26,27 @@
         <div class="bl-container">
           <h1 class="bl-title">{{ page.title }}</h1>
           
-          {% if page.content != "" %}
-          <div class="bl-description">
-            {{ content }}
+          <!-- BL Category Filter -->
+          <div class="bl-filter-container">
+            <button class="bl-filter-btn active" data-category="all">All</button>
+            {% assign all_categories = "" | split: "" %}
+            {% for post in site.posts %}
+              {% for category in post.categories %}
+                {% unless all_categories contains category %}
+                  {% assign all_categories = all_categories | push: category %}
+                {% endunless %}
+              {% endfor %}
+            {% endfor %}
+            {% assign sorted_categories = all_categories | sort %}
+            {% for category in sorted_categories %}
+              <button class="bl-filter-btn" data-category="{{ category }}">{{ category }}</button>
+            {% endfor %}
           </div>
-          {% endif %}
 
-          <div class="bl-posts-grid">
+          <div class="bl-posts-grid" id="postsGrid">
             {% assign sorted_posts = site.posts | sort: 'date' | reverse %}
             {% for post in sorted_posts %}
-              <article class="bl-post-card">
+              <article class="bl-post-card" data-categories="{{ post.categories | join: ',' }}">
                 <a href="{{ post.url | relative_url }}" class="bl-post-link">
                   <div class="bl-post-thumbnail">
                     {% if post.image %}
@@ -116,14 +127,42 @@
     
     .bl-title {
       font-size: 2.5rem;
-      margin-bottom: 1rem;
+      margin-bottom: 2rem;
       color: #24292e;
     }
     
-    .bl-description {
-      margin-bottom: 3rem;
-      color: #666;
-      font-size: 1.1rem;
+    /* BL Filter */
+    .bl-filter-container {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      padding-bottom: 1.5rem;
+      border-bottom: 2px solid #e1e4e8;
+    }
+    
+    .bl-filter-btn {
+      padding: 0.5rem 1.25rem;
+      background: #fff;
+      border: 1px solid #e1e4e8;
+      border-radius: 20px;
+      color: #586069;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .bl-filter-btn:hover {
+      background: #f6f8fa;
+      border-color: #0366d6;
+      color: #0366d6;
+    }
+    
+    .bl-filter-btn.active {
+      background: #0366d6;
+      border-color: #0366d6;
+      color: #fff;
     }
     
     /* BL Posts Grid */
@@ -141,6 +180,10 @@
       overflow: hidden;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
       height: 100%;
+    }
+    
+    .bl-post-card.hidden {
+      display: none;
     }
     
     .bl-post-card:hover {
@@ -264,6 +307,15 @@
         font-size: 2rem;
       }
       
+      .bl-filter-container {
+        gap: 0.5rem;
+      }
+      
+      .bl-filter-btn {
+        padding: 0.4rem 1rem;
+        font-size: 0.85rem;
+      }
+      
       .bl-posts-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 1.5rem;
@@ -284,5 +336,34 @@
       }
     }
     </style>
+    
+    <script>
+    // BL Category Filter
+    document.addEventListener('DOMContentLoaded', function() {
+      const filterBtns = document.querySelectorAll('.bl-filter-btn');
+      const postCards = document.querySelectorAll('.bl-post-card');
+      
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          const category = this.dataset.category;
+          
+          // Update active button
+          filterBtns.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          
+          // Filter posts
+          postCards.forEach(card => {
+            const categories = card.dataset.categories.split(',');
+            
+            if (category === 'all' || categories.includes(category)) {
+              card.classList.remove('hidden');
+            } else {
+              card.classList.add('hidden');
+            }
+          });
+        });
+      });
+    });
+    </script>
   </body>
 </html>
