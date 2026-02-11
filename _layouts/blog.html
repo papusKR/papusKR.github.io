@@ -33,13 +33,12 @@
               <button class="bl-filter-btn active" data-main-category="all">All</button>
               {% assign main_categories = "" | split: "" %}
               {% for post in site.posts %}
-                {% for category in post.categories %}
-                  {% assign cat_parts = category | split: "/" %}
-                  {% assign main_cat = cat_parts[0] %}
+                {% if post.categories.size > 0 %}
+                  {% assign main_cat = post.categories[0] %}
                   {% unless main_categories contains main_cat %}
                     {% assign main_categories = main_categories | push: main_cat %}
                   {% endunless %}
-                {% endfor %}
+                {% endif %}
               {% endfor %}
               {% assign sorted_main_categories = main_categories | sort %}
               {% for main_cat in sorted_main_categories %}
@@ -59,7 +58,9 @@
           <div class="bl-posts-grid" id="postsGrid">
             {% assign sorted_posts = site.posts | sort: 'date' | reverse %}
             {% for post in sorted_posts %}
-              <article class="bl-post-card" data-categories="{{ post.categories | join: '|' }}">
+              {% assign main_cat = post.categories[0] | default: "" %}
+              {% assign sub_cat = post.categories[1] | default: "" %}
+              <article class="bl-post-card" data-main-category="{{ main_cat }}" data-sub-category="{{ sub_cat }}">
                 <a href="{{ post.url | relative_url }}" class="bl-card-link">
                   <div class="bl-card-cover">
                     <div class="bl-card-cover-overlay">
@@ -78,14 +79,11 @@
                     
                     <div class="bl-card-meta">
                       <div class="bl-card-tags">
-                        {% if post.categories.size > 0 %}
-                          {% for category in post.categories limit:1 %}
-                            {% assign cat_parts = category | split: "/" %}
-                            <span class="bl-card-tag bl-main-tag">{{ cat_parts[0] }}</span>
-                            {% if cat_parts[1] %}
-                              <span class="bl-card-tag bl-sub-tag">{{ cat_parts[1] }}</span>
-                            {% endif %}
-                          {% endfor %}
+                        {% if main_cat != "" %}
+                          <span class="bl-card-tag bl-main-tag">{{ main_cat }}</span>
+                        {% endif %}
+                        {% if sub_cat != "" %}
+                          <span class="bl-card-tag bl-sub-tag">{{ sub_cat }}</span>
                         {% endif %}
                       </div>
                       <time class="bl-card-date" datetime="{{ post.date | date_to_xmlschema }}">
@@ -402,7 +400,7 @@
     </style>
     
     <script>
-    // BL 2-Level Category Filter
+    // BL 2-Level Category Filter (Array-based: first=main, second=sub)
     document.addEventListener('DOMContentLoaded', function() {
       const mainCategoryBtns = document.querySelectorAll('#mainCategoryFilter .bl-filter-btn');
       const subCategorySection = document.getElementById('subCategorySection');
@@ -415,19 +413,17 @@
       // Build category structure
       const categoryStructure = {};
       postCards.forEach(card => {
-        const categories = card.dataset.categories.split('|');
-        categories.forEach(fullCategory => {
-          const parts = fullCategory.split('/');
-          const mainCat = parts[0];
-          const subCat = parts[1] || null;
-          
+        const mainCat = card.dataset.mainCategory;
+        const subCat = card.dataset.subCategory;
+        
+        if (mainCat) {
           if (!categoryStructure[mainCat]) {
             categoryStructure[mainCat] = new Set();
           }
           if (subCat) {
             categoryStructure[mainCat].add(subCat);
           }
-        });
+        }
       });
       
       // Main category filter
@@ -466,7 +462,7 @@
         subCategoryFilter.appendChild(allBtn);
         
         // Add sub category buttons
-        if (categoryStructure[mainCategory]) {
+        if (categoryStructure[mainCategory] && categoryStructure[mainCategory].size > 0) {
           const subCategories = Array.from(categoryStructure[mainCategory]).sort();
           subCategories.forEach(subCat => {
             const btn = document.createElement('button');
@@ -496,25 +492,20 @@
       // Filter posts
       function filterPosts() {
         postCards.forEach(card => {
-          const categories = card.dataset.categories.split('|');
+          const mainCat = card.dataset.mainCategory;
+          const subCat = card.dataset.subCategory;
           let shouldShow = false;
           
           if (currentMainCategory === 'all') {
             shouldShow = true;
           } else {
-            categories.forEach(fullCategory => {
-              const parts = fullCategory.split('/');
-              const mainCat = parts[0];
-              const subCat = parts[1] || null;
-              
-              if (mainCat === currentMainCategory) {
-                if (currentSubCategory === 'all') {
-                  shouldShow = true;
-                } else if (subCat === currentSubCategory) {
-                  shouldShow = true;
-                }
+            if (mainCat === currentMainCategory) {
+              if (currentSubCategory === 'all') {
+                shouldShow = true;
+              } else if (subCat === currentSubCategory) {
+                shouldShow = true;
               }
-            });
+            }
           }
           
           if (shouldShow) {
