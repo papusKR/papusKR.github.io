@@ -1,0 +1,129 @@
+---
+layout: default
+title: Blog
+permalink: /blog/
+description: "탐지 룰, 분석 케이스, 운영 기록을 카테고리별로 모았습니다."
+---
+<div class="container-wide">
+
+  <header class="post-head">
+    <p class="eyebrow">Records</p>
+    <h1>{{ page.title }}</h1>
+    <p class="lede">{{ page.description }}</p>
+  </header>
+
+  {%- if site.posts.size > 0 -%}
+  <div class="filters">
+    <div class="filter-row" id="catRow">
+      <button class="chip is-active" data-cat="all">All</button>
+      {%- assign cats = "" | split: "" -%}
+      {%- for post in site.posts -%}
+        {%- assign c = post.categories[0] -%}
+        {%- if c and c != "" -%}
+          {%- unless cats contains c -%}{%- assign cats = cats | push: c -%}{%- endunless -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- for c in cats -%}
+      <button class="chip" data-cat="{{ c }}">{{ c }}</button>
+      {%- endfor -%}
+      <span class="filter-count" id="count"></span>
+    </div>
+    <div class="filter-row" id="subRow" hidden></div>
+  </div>
+
+  <div class="rows" id="rows">
+    {%- for post in site.posts -%}
+    <article class="row"
+             data-cat="{{ post.categories[0] | default: '' }}"
+             data-sub="{{ post.categories[1] | default: '' }}">
+      <a href="{{ post.url | relative_url }}">
+        {% include rec.html post=post %}
+        <h3>{{ post.title }}</h3>
+        <p>{{ post.description | default: post.excerpt | strip_html | truncate: 130 }}</p>
+      </a>
+    </article>
+    {%- endfor -%}
+  </div>
+  <p class="empty" id="noResult" hidden>해당 조건의 기록이 없습니다.</p>
+  {%- else -%}
+  <p class="empty">아직 기록이 없습니다.</p>
+  {%- endif -%}
+
+</div>
+
+<script>
+(function () {
+  var rows    = Array.prototype.slice.call(document.querySelectorAll('.row'));
+  if (!rows.length) return;
+
+  var catRow  = document.getElementById('catRow');
+  var subRow  = document.getElementById('subRow');
+  var countEl = document.getElementById('count');
+  var noResult= document.getElementById('noResult');
+
+  var tree = {};
+  rows.forEach(function (r) {
+    var c = r.dataset.cat, s = r.dataset.sub;
+    if (!c) return;
+    tree[c] = tree[c] || new Set();
+    if (s) tree[c].add(s);
+  });
+
+  var curCat = 'all', curSub = 'all';
+
+  function apply() {
+    var shown = 0;
+    rows.forEach(function (r) {
+      var ok = curCat === 'all'
+        || (curSub === 'all' ? r.dataset.cat === curCat
+                             : r.dataset.cat === curCat && r.dataset.sub === curSub);
+      r.classList.toggle('is-hidden', !ok);
+      if (ok) shown++;
+    });
+    countEl.textContent = shown + ' / ' + rows.length;
+    noResult.hidden = shown > 0;
+  }
+
+  function buildSubs(cat) {
+    subRow.innerHTML = '';
+    var subs = cat === 'all' ? null : tree[cat];
+    if (!subs || !subs.size) { subRow.hidden = true; return; }
+
+    var all = document.createElement('button');
+    all.className = 'chip chip-sub is-active';
+    all.dataset.sub = 'all';
+    all.textContent = 'All';
+    subRow.appendChild(all);
+
+    Array.from(subs).sort().forEach(function (s) {
+      var b = document.createElement('button');
+      b.className = 'chip chip-sub';
+      b.dataset.sub = s;
+      b.textContent = s;
+      subRow.appendChild(b);
+    });
+    subRow.hidden = false;
+  }
+
+  catRow.addEventListener('click', function (e) {
+    var btn = e.target.closest('.chip');
+    if (!btn) return;
+    curCat = btn.dataset.cat; curSub = 'all';
+    catRow.querySelectorAll('.chip').forEach(function (b) { b.classList.remove('is-active'); });
+    btn.classList.add('is-active');
+    buildSubs(curCat);
+    apply();
+  });
+
+  subRow.addEventListener('click', function (e) {
+    var btn = e.target.closest('.chip');
+    if (!btn) return;
+    curSub = btn.dataset.sub;
+    subRow.querySelectorAll('.chip').forEach(function (b) { b.classList.remove('is-active'); });
+    btn.classList.add('is-active');
+    apply();
+  });
+
+  apply();
+})();
+</script>

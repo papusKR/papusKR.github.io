@@ -1,0 +1,7 @@
+{%- assign main_cat = include.post.categories[0] -%}
+{%- assign sub_cat  = include.post.categories[1] -%}
+<div class="rec">
+  <time datetime="{{ include.post.date | date_to_xmlschema }}">{{ include.post.date | date: "%Y-%m-%d" }}</time>
+  {%- if main_cat -%}<span class="cat">{{ main_cat }}</span>{%- endif -%}
+  {%- if sub_cat -%}<span class="sub">{{ sub_cat }}</span>{%- endif -%}
+</div>

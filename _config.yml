@@ -1,39 +1,79 @@
-# Site settings
-lang: ko-KR
-logo: /assets/img/profile-hero.png  # Profile image in sidebar (PNG format)
-
-# Sidebar (SL) profile
+# ─────────────────────────────────────────────
+#  Site
+# ─────────────────────────────────────────────
+title: "papusKR"
 name: "papusKR"
 role: "Security & Network Engineer"
+tagline: "소 잃기 전에 외양간을 고칩니다"
+description: "보안운영과 침해대응을 기록합니다. 탐지 룰, 분석 케이스, 운영 자동화."
+author: "papusKR"
+lang: ko-KR
 
-description: "외양간을 고치는 사람이 목표인 사람"
+# GitHub Pages user site 기준. 프로젝트 페이지라면 baseurl을 "/레포이름" 으로.
+url: "https://axplank.github.io"
+baseurl: ""
 
-# Navigation (sidebar menu)
+# 사이드바 프로필 이미지. 파일이 없으면 자동으로 이니셜 뱃지가 표시됩니다.
+# 준비되면 아래 주석을 풀고 assets/img/profile.png 를 올리세요.
+# avatar: /assets/img/profile.png
+
+email: ""          # About 페이지에 노출됩니다. 비워두면 숨김.
+github_user: ""    # 예: AxPlank
+linkedin_url: ""   # 예: https://linkedin.com/in/...
+
+# ─────────────────────────────────────────────
+#  Navigation
+# ─────────────────────────────────────────────
 navigation:
+  - name: "Home"
+    link: "/"
   - name: "Portfolio"
     link: "/portfolio/"
   - name: "Blog"
     link: "/blog/"
-  - name: "Tool"
-    link: "#"  # TODO: Add tool page later
-  - name: "Contact"
-    link: "/contact/"
+  - name: "About"
+    link: "/about/"
 
-# Platforms (social links)
-platforms:
-  - name: "GitHub"
-    link: "#"  # TODO: Add GitHub profile URL later
-    icon: "🐱"
-  - name: "LinkedIn"
-    link: "#"  # TODO: Add LinkedIn profile URL later
-    icon: "🔗"
+# ─────────────────────────────────────────────
+#  Taxonomy
+#  categories[0] = 메인 카테고리. 아래 4개 중에서만 사용하세요.
+#  categories[1] = 서브 카테고리. 자유롭게.
+# ─────────────────────────────────────────────
+main_categories:
+  - Detection    # 탐지 룰, 시그니처, 튜닝
+  - Analysis     # 침해 분석, 아티팩트, 리포트
+  - Operations   # 운영, 자동화, 인프라
+  - Notes        # 학습 정리, 메모
 
-remote_theme: vaibhavvikas/jekyll-theme-minimalistic
+# ─────────────────────────────────────────────
+#  Build
+# ─────────────────────────────────────────────
+permalink: /blog/:year/:month/:day/:title/
+
 plugins:
-  - jekyll-remote-theme
+  - jekyll-sitemap
+  - jekyll-feed
 
 kramdown:
+  input: GFM
   syntax_highlighter: rouge
   syntax_highlighter_opts:
     block:
       line_numbers: true
+
+sass:
+  style: compressed
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor
+  - .jekyll-cache
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"

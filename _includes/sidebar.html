@@ -1,32 +1,45 @@
-<div class="link-wrapper">
-  {%- comment -%}
-  Navigation menu first (moved to top)
-  {%- endcomment -%}
-  {% if site.navigation %}
-  <h3 class="sidebar-h3">Contents:</h3>
-  <ul class="content">
-  {%- for item in site.navigation %}
-    <li><a href="{{ item.link }}">{{ item.name }}</a>
-        {% if item.sublist %}
-        <ul class="sublist">
-            {%- for subitem in item.sublist %}
-            <li><a href="{{ subitem.link }}">{{ subitem.name }}</a></li>
-            {%- endfor %}
-        </ul>
-        {% endif %}
-    </li>
-  {%- endfor %}
-  </ul>
-  {% endif %}
+<aside class="sidebar">
+  <div class="sb-profile">
+    {%- if site.avatar -%}
+      <img class="sb-avatar" src="{{ site.avatar | relative_url }}" alt="{{ site.name }}">
+    {%- else -%}
+      <div class="sb-monogram" aria-hidden="true">pK</div>
+    {%- endif -%}
+    <div>
+      <p class="sb-name">{{ site.name }}</p>
+      <p class="sb-role">{{ site.role }}</p>
+      <p class="sb-tagline">{{ site.tagline }}</p>
+    </div>
+  </div>
 
-  {%- comment -%}
-  Platforms (social links) second (moved to bottom)
-  {%- endcomment -%}
-  {% if site.platforms %}
-  <ul class="link">
-    {%- for platform in site.platforms %}
-    <li><a href="{{ platform.link }}">{{ platform.icon }}&nbsp;{{ platform.name }}</a></li>
-    {%- endfor %}
-  </ul>
-  {% endif %}
-</div>
+  <nav class="sb-nav" aria-label="주요 메뉴">
+    <p class="sb-label">Navigation</p>
+    <ul>
+      {%- for item in site.navigation -%}
+      {%- assign here = false -%}
+      {%- if item.link == "/" and page.url == "/" -%}{%- assign here = true -%}
+      {%- elsif item.link != "/" and page.url contains item.link -%}{%- assign here = true -%}
+      {%- endif -%}
+      <li>
+        <a href="{{ item.link | relative_url }}"{% if here %} aria-current="page"{% endif %}>{{ item.name }}</a>
+      </li>
+      {%- endfor -%}
+    </ul>
+  </nav>
+
+  <div class="sb-foot">
+    <ul class="sb-links">
+      {%- if site.github_user and site.github_user != "" -%}
+      <li><a href="https://github.com/{{ site.github_user }}" rel="me noopener">-> GitHub</a></li>
+      {%- endif -%}
+      {%- if site.linkedin_url and site.linkedin_url != "" -%}
+      <li><a href="{{ site.linkedin_url }}" rel="me noopener">-> LinkedIn</a></li>
+      {%- endif -%}
+      {%- if site.email and site.email != "" -%}
+      <li><a href="mailto:{{ site.email }}">-> Email</a></li>
+      {%- endif -%}
+      <li><a href="{{ '/feed.xml' | relative_url }}">-> RSS</a></li>
+    </ul>
+    <p class="sb-copy">(c) {{ 'now' | date: "%Y" }} {{ site.name }}</p>
+  </div>
+</aside>

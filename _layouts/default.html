@@ -1,75 +1,14 @@
-{% case site.color-scheme %}
-  {% when "", nil, false, 0, empty %}
-    {% assign ColorScheme = "auto" %}
-  {% else %}
-    {% assign ColorScheme = site.color-scheme %}
-{% endcase %}
-
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: "ko-KR" }}">
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="{{ site.description | default: page.description | default: 'Security & Network Portfolio' }}">
-    <meta name="author" content="{{ site.author }}">
-    
-    <!-- SEO Tags -->
-    {% seo %}
-    
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="{{ "/assets/css/colors-ColorScheme.css?v=" | replace: "ColorScheme", ColorScheme | append: site.github.build_revision | relative_url }}">
-    <link rel="stylesheet" href="{{ "/assets/css/style.css?v=" | append: site.github.build_revision | relative_url }}">
-    <link rel="stylesheet" href="{{ "/assets/css/gallery.css?v=" | append: site.github.build_revision | relative_url }}">
-    
-    <!-- Preload Logo -->
-    {% if site.logo %}
-    <link rel="preload" href="{{ site.logo | relative_url }}" as="image">
-    {% endif %}
-    
-    <!-- Favicon -->
-    {% if site.favicon %}
-    <link rel="icon" type="image/x-icon" href="{{ site.favicon | relative_url }}">
-    {% endif %}
-    
-    <!-- Custom Head -->
-    {% include head-custom.html %}
-  </head>
-  
-  <body>
-    <div class="wrapper">
-      <!-- Sidebar Navigation -->
-      <div class="sidebar">
-        <header>
-          {%- include header.html -%}
-        </header>
-        
-        <!-- Mobile Navigation -->
-        {% include mobile.html %}
-        
-        <!-- Sidebar Footer -->
-        <div class="sidebar-footer">
-          {%- include footer.html -%}
-        </div>
-      </div>
-      
-      <!-- Main Content Section -->
-      <section>
-        {{ content }}
-      </section>
-      
-      <!-- Footer (for mobile) -->
-      <footer>
-        {%- include footer.html -%}
-      </footer>
-    </div>
-    
-    <!-- Scripts -->
-    <script src="{{ "/assets/js/scale.fix.js" | relative_url }}"></script>
-    
-    <!-- Custom Scripts -->
-    {% if site.google_analytics %}
-      {% include analytics.html %}
-    {% endif %}
-  </body>
+<html lang="{{ site.lang | default: 'ko-KR' }}">
+<head>
+  {%- include head.html -%}
+</head>
+<body>
+  <div class="shell">
+    {%- include sidebar.html -%}
+    <main class="main">
+      {{ content }}
+    </main>
+  </div>
+</body>
 </html>

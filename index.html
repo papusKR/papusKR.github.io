@@ -1,0 +1,73 @@
+---
+layout: default
+title: Home
+description: "보안운영과 침해대응을 기록합니다. 탐지 룰, 분석 케이스, 운영 자동화."
+---
+<div class="container-wide">
+
+  <section class="hero">
+    <p class="eyebrow">Security Operations</p>
+    <h1>소 잃기 전에<br><em>외양간을 고칩니다</em></h1>
+    <p>
+      정보보안 관제 업무를 하며 마주친 알람과 로그를 기록으로 남깁니다.
+      탐지 룰을 쓰고, 오탐을 줄이고, 반복되는 일은 자동화합니다.
+      사고가 난 뒤가 아니라 나기 전에 막는 쪽에 관심이 있습니다.
+    </p>
+    <div class="hero-stats">
+      <div><b>{{ site.posts.size }}</b>기록</div>
+      <div><b>{{ site.main_categories.size }}</b>카테고리</div>
+      <div><b>SOC</b>현재 직무</div>
+      <div><b>CERT</b>목표 직무</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2>최근 기록</h2>
+      <a class="section-more" href="{{ '/blog/' | relative_url }}">전체 보기 &rarr;</a>
+    </div>
+    {%- if site.posts.size > 0 -%}
+    <div class="grid">
+      {%- for post in site.posts limit: 6 -%}
+        {% include post-card.html post=post %}
+      {%- endfor -%}
+    </div>
+    {%- else -%}
+    <p class="empty">아직 기록이 없습니다.</p>
+    {%- endif -%}
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2>다루는 것</h2>
+      <a class="section-more" href="{{ '/portfolio/' | relative_url }}">포트폴리오 &rarr;</a>
+    </div>
+    <div class="skill-grid">
+      <div class="skill">
+        <h4>Detection</h4>
+        <ul>
+          <li>Sigma 룰 작성 및 변환</li>
+          <li>MITRE ATT&amp;CK 매핑</li>
+          <li>오탐 튜닝</li>
+        </ul>
+      </div>
+      <div class="skill">
+        <h4>Analysis</h4>
+        <ul>
+          <li>로그 상관 분석</li>
+          <li>타임라인 재구성</li>
+          <li>침해사고 리포트</li>
+        </ul>
+      </div>
+      <div class="skill">
+        <h4>Operations</h4>
+        <ul>
+          <li>SIEM 운영</li>
+          <li>방화벽 · IDS/IPS 정책</li>
+          <li>업무 자동화 스크립트</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</div>
