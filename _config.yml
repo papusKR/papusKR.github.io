@@ -10,7 +10,7 @@ author: "papusKR"
 lang: ko-KR
 
 # GitHub Pages user site 기준. 프로젝트 페이지라면 baseurl을 "/레포이름" 으로.
-url: "https://axplank.github.io"
+url: "https://papusKR.github.io"
 baseurl: ""
 
 # 사이드바 프로필 이미지. 파일이 없으면 자동으로 이니셜 뱃지가 표시됩니다.
