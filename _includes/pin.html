@@ -1,0 +1,10 @@
+{%- assign p = include.post -%}
+<article class="pin">
+  <a href="{{ p.url | relative_url }}">
+    <div class="meta">
+      {%- if p.categories[0] -%}<span class="badge" data-c="{{ p.categories[0] }}">{{ p.categories[0] }}</span>{%- endif -%}
+      <time datetime="{{ p.date | date_to_xmlschema }}">{{ p.date | date: "%m.%d" }}</time>
+    </div>
+    <h3>{{ p.title }}</h3>
+  </a>
+</article>

@@ -1,0 +1,16 @@
+{%- assign p = include.post -%}
+<article class="item" data-cat="{{ p.categories[0] | default: '' }}" data-sub="{{ p.categories[1] | default: '' }}">
+  <a href="{{ p.url | relative_url }}">
+    <div class="meta">
+      <span class="left">
+        {%- if p.categories[0] -%}<span class="badge" data-c="{{ p.categories[0] }}">{{ p.categories[0] }}</span>{%- endif -%}
+        {%- if p.categories[1] -%}<span class="sub">{{ p.categories[1] }}</span>{%- endif -%}
+      </span>
+      <time datetime="{{ p.date | date_to_xmlschema }}">{{ p.date | date: "%Y.%m.%d" }}</time>
+    </div>
+    <h3>{{ p.title }}</h3>
+    {%- if p.tags.size > 0 -%}
+    <p class="tags">{% for t in p.tags limit: 4 %}#{{ t }} {% endfor %}</p>
+    {%- endif -%}
+  </a>
+</article>

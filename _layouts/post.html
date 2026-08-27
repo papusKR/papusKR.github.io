@@ -1,39 +1,43 @@
 ---
 layout: default
 ---
-<div class="container">
+<div class="doc">
   <article>
-    <header class="post-head">
-      {% include rec.html post=page %}
+    <header class="doc-head">
+      <div class="meta">
+        <span class="left">
+          {%- if page.categories[0] -%}<span class="badge" data-c="{{ page.categories[0] }}">{{ page.categories[0] }}</span>{%- endif -%}
+          {%- if page.categories[1] -%}<span class="sub">{{ page.categories[1] }}</span>{%- endif -%}
+        </span>
+        <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y.%m.%d" }}</time>
+      </div>
       <h1>{{ page.title }}</h1>
       {%- if page.description -%}<p class="lede">{{ page.description }}</p>{%- endif -%}
       {%- if page.tags.size > 0 -%}
-      <div class="rec"><span class="tags">{% for t in page.tags %}#{{ t }} {% endfor %}</span></div>
+      <p class="tags">{% for t in page.tags %}#{{ t }} {% endfor %}</p>
       {%- endif -%}
     </header>
 
-    <div class="prose">
-      {{ content }}
-    </div>
+    <div class="prose">{{ content }}</div>
 
-    <footer class="post-foot">
+    <footer class="doc-foot">
       {%- if page.previous.url or page.next.url -%}
       <nav class="pager" aria-label="글 이동">
         {%- if page.previous.url -%}
-        <a class="prev" href="{{ page.previous.url | relative_url }}">
-          <span class="dir">&larr; 이전 글</span>
+        <a href="{{ page.previous.url | relative_url }}">
+          <span class="dir">이전</span>
           <span class="ttl">{{ page.previous.title }}</span>
         </a>
         {%- endif -%}
         {%- if page.next.url -%}
-        <a class="next" href="{{ page.next.url | relative_url }}">
-          <span class="dir">다음 글 &rarr;</span>
+        <a class="nx" href="{{ page.next.url | relative_url }}">
+          <span class="dir">다음</span>
           <span class="ttl">{{ page.next.title }}</span>
         </a>
         {%- endif -%}
       </nav>
       {%- endif -%}
-      <a class="back" href="{{ '/blog/' | relative_url }}">&larr; 목록으로</a>
+      <a class="back" href="{{ '/blog/' | relative_url }}">목록으로</a>
     </footer>
   </article>
 </div>

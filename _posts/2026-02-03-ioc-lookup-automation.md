@@ -3,7 +3,7 @@ title: "IOC 조회 자동화 스크립트"
 date: 2026-02-03
 categories: [Operations, Automation]
 tags: [python, ioc, api, automation]
-description: "IP 하나 확인하려고 탭 다섯 개 여는 게 싫어서 만든 것."
+description: "의심 IP 하나 확인하는 데 매번 사이트 여러 곳을 여는 게 비효율적이라 만든 것."
 ---
 
 더미 글입니다.
@@ -18,9 +18,9 @@ description: "IP 하나 확인하려고 탭 다섯 개 여는 게 싫어서 만�
 ```python
 import asyncio, httpx
 
-async def lookup(client, name, url, headers=None):
+async def lookup(client, name, url):
     try:
-        r = await client.get(url, headers=headers, timeout=10)
+        r = await client.get(url, timeout=10)
         return name, r.json()
     except Exception as e:
         return name, {"error": str(e)}
@@ -39,4 +39,4 @@ if __name__ == "__main__":
 
 ## 결과
 
-건당 3분에서 10초로 줄었습니다. 남는 시간은 판단에 씁니다.
+건당 3분에서 10초로 줄었습니다.

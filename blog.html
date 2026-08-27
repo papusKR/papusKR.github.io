@@ -1,126 +1,110 @@
 ---
 layout: default
-title: Blog
+title: 기록
 permalink: /blog/
-description: "탐지 룰, 분석 케이스, 운영 기록을 카테고리별로 모았습니다."
+description: "탐지 룰, 분석 케이스, 운영 기록."
 ---
-<div class="container-wide">
-
-  <header class="post-head">
-    <p class="eyebrow">Records</p>
-    <h1>{{ page.title }}</h1>
-    <p class="lede">{{ page.description }}</p>
-  </header>
+<div class="col">
 
   {%- if site.posts.size > 0 -%}
-  <div class="filters">
-    <div class="filter-row" id="catRow">
-      <button class="chip is-active" data-cat="all">All</button>
-      {%- assign cats = "" | split: "" -%}
-      {%- for post in site.posts -%}
-        {%- assign c = post.categories[0] -%}
-        {%- if c and c != "" -%}
-          {%- unless cats contains c -%}{%- assign cats = cats | push: c -%}{%- endunless -%}
-        {%- endif -%}
-      {%- endfor -%}
-      {%- for c in cats -%}
-      <button class="chip" data-cat="{{ c }}">{{ c }}</button>
-      {%- endfor -%}
-      <span class="filter-count" id="count"></span>
-    </div>
-    <div class="filter-row" id="subRow" hidden></div>
-  </div>
 
-  <div class="rows" id="rows">
+  <div class="tabs" id="tabs" role="tablist">
+    <button class="tab on" data-cat="all" role="tab">전체</button>
+    {%- assign cats = "" | split: "" -%}
     {%- for post in site.posts -%}
-    <article class="row"
-             data-cat="{{ post.categories[0] | default: '' }}"
-             data-sub="{{ post.categories[1] | default: '' }}">
-      <a href="{{ post.url | relative_url }}">
-        {% include rec.html post=post %}
-        <h3>{{ post.title }}</h3>
-        <p>{{ post.description | default: post.excerpt | strip_html | truncate: 130 }}</p>
-      </a>
-    </article>
+      {%- assign c = post.categories[0] -%}
+      {%- if c and c != "" -%}
+        {%- unless cats contains c -%}{%- assign cats = cats | push: c -%}{%- endunless -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- for c in cats -%}
+    <button class="tab" data-cat="{{ c }}" role="tab">{{ c }}</button>
     {%- endfor -%}
   </div>
-  <p class="empty" id="noResult" hidden>해당 조건의 기록이 없습니다.</p>
+
+  <div class="pills" id="pills" hidden></div>
+
+  <div class="sec-head">
+    <h2>기록</h2>
+    <span class="aside" id="count"></span>
+  </div>
+
+  <div class="list" id="list">
+    {%- for post in site.posts -%}{% include item.html post=post %}{%- endfor -%}
+  </div>
+  <p class="none" id="empty" hidden>해당 조건의 기록이 없습니다.</p>
+
   {%- else -%}
-  <p class="empty">아직 기록이 없습니다.</p>
+  <p class="none">아직 기록이 없습니다.</p>
   {%- endif -%}
 
 </div>
 
 <script>
 (function () {
-  var rows    = Array.prototype.slice.call(document.querySelectorAll('.row'));
-  if (!rows.length) return;
+  var items = Array.prototype.slice.call(document.querySelectorAll('.item'));
+  if (!items.length) return;
 
-  var catRow  = document.getElementById('catRow');
-  var subRow  = document.getElementById('subRow');
-  var countEl = document.getElementById('count');
-  var noResult= document.getElementById('noResult');
+  var tabs  = document.getElementById('tabs');
+  var pills = document.getElementById('pills');
+  var count = document.getElementById('count');
+  var empty = document.getElementById('empty');
 
   var tree = {};
-  rows.forEach(function (r) {
-    var c = r.dataset.cat, s = r.dataset.sub;
+  items.forEach(function (el) {
+    var c = el.dataset.cat, s = el.dataset.sub;
     if (!c) return;
-    tree[c] = tree[c] || new Set();
-    if (s) tree[c].add(s);
+    tree[c] = tree[c] || [];
+    if (s && tree[c].indexOf(s) === -1) tree[c].push(s);
   });
 
-  var curCat = 'all', curSub = 'all';
+  var cat = 'all', sub = 'all';
 
   function apply() {
-    var shown = 0;
-    rows.forEach(function (r) {
-      var ok = curCat === 'all'
-        || (curSub === 'all' ? r.dataset.cat === curCat
-                             : r.dataset.cat === curCat && r.dataset.sub === curSub);
-      r.classList.toggle('is-hidden', !ok);
-      if (ok) shown++;
+    var n = 0;
+    items.forEach(function (el) {
+      var ok = cat === 'all'
+        || (sub === 'all' ? el.dataset.cat === cat
+                          : el.dataset.cat === cat && el.dataset.sub === sub);
+      el.classList.toggle('off', !ok);
+      if (ok) n++;
     });
-    countEl.textContent = shown + ' / ' + rows.length;
-    noResult.hidden = shown > 0;
+    count.textContent = n + ' / ' + items.length;
+    empty.hidden = n > 0;
   }
 
-  function buildSubs(cat) {
-    subRow.innerHTML = '';
+  function buildPills() {
+    pills.innerHTML = '';
     var subs = cat === 'all' ? null : tree[cat];
-    if (!subs || !subs.size) { subRow.hidden = true; return; }
+    if (!subs || !subs.length) { pills.hidden = true; return; }
 
     var all = document.createElement('button');
-    all.className = 'chip chip-sub is-active';
-    all.dataset.sub = 'all';
-    all.textContent = 'All';
-    subRow.appendChild(all);
+    all.className = 'pill on'; all.dataset.sub = 'all'; all.textContent = '전체';
+    pills.appendChild(all);
 
-    Array.from(subs).sort().forEach(function (s) {
+    subs.slice().sort().forEach(function (s) {
       var b = document.createElement('button');
-      b.className = 'chip chip-sub';
-      b.dataset.sub = s;
-      b.textContent = s;
-      subRow.appendChild(b);
+      b.className = 'pill'; b.dataset.sub = s; b.textContent = s;
+      pills.appendChild(b);
     });
-    subRow.hidden = false;
+    pills.hidden = false;
   }
 
-  catRow.addEventListener('click', function (e) {
-    var btn = e.target.closest('.chip');
-    if (!btn) return;
-    curCat = btn.dataset.cat; curSub = 'all';
-    catRow.querySelectorAll('.chip').forEach(function (b) { b.classList.remove('is-active'); });
-    btn.classList.add('is-active');
-    buildSubs(curCat);
-    apply();
+  tabs.addEventListener('click', function (e) {
+    var b = e.target.closest('.tab');
+    if (!b) return;
+    cat = b.dataset.cat; sub = 'all';
+    tabs.querySelectorAll('.tab').forEach(function (x) { x.classList.remove('on'); });
+    b.classList.add('on');
+    buildPills(); apply();
   });
 
-  subRow.addEventListener('click', function (e) {
-    var btn = e.target.closest('.chip');
-    if (!btn) return;
-    curSub = btn.dataset.sub;
-    subRow.querySelectorAll('.chip').forEach(function (b) { b.classList.remove('is-active'); });
-    btn.classList.add('is-active');
+  pills.addEventListener('click', function (e) {
+    var b = e.target.closest('.pill');
+    if (!b) return;
+    sub = b.dataset.sub;
+    pills.querySelectorAll('.pill').forEach(function (x) { x.classList.remove('on'); });
+    b.classList.add('on');
     apply();
   });
 

@@ -4,46 +4,49 @@
 title: "papusKR"
 name: "papusKR"
 role: "Security & Network Engineer"
-tagline: "소 잃기 전에 외양간을 고칩니다"
-description: "보안운영과 침해대응을 기록합니다. 탐지 룰, 분석 케이스, 운영 자동화."
+tagline: "외양간을 고치는 사람이 목표인 사람"
+description: "보안운영과 침해대응 기록."
 author: "papusKR"
 lang: ko-KR
 
-# GitHub Pages user site 기준. 프로젝트 페이지라면 baseurl을 "/레포이름" 으로.
-url: "https://papusKR.github.io"
+url: "https://papuskr.github.io"
 baseurl: ""
 
-# 사이드바 프로필 이미지. 파일이 없으면 자동으로 이니셜 뱃지가 표시됩니다.
-# 준비되면 아래 주석을 풀고 assets/img/profile.png 를 올리세요.
+# 프로필 이미지. 없으면 이니셜이 표시됩니다.
 # avatar: /assets/img/profile.png
 
-email: ""          # About 페이지에 노출됩니다. 비워두면 숨김.
-github_user: ""    # 예: AxPlank
-linkedin_url: ""   # 예: https://linkedin.com/in/...
+email: ""
+github_user: ""
+linkedin_url: ""
 
 # ─────────────────────────────────────────────
-#  Navigation
+#  Navigation — 아이콘은 _includes/rail.html 에서 지정
 # ─────────────────────────────────────────────
 navigation:
-  - name: "Home"
+  - name: "홈"
     link: "/"
-  - name: "Portfolio"
-    link: "/portfolio/"
-  - name: "Blog"
+    icon: "home"
+  - name: "기록"
     link: "/blog/"
-  - name: "About"
+    icon: "doc"
+  - name: "작업"
+    link: "/portfolio/"
+    icon: "work"
+  - name: "소개"
     link: "/about/"
+    icon: "user"
 
 # ─────────────────────────────────────────────
 #  Taxonomy
-#  categories[0] = 메인 카테고리. 아래 4개 중에서만 사용하세요.
-#  categories[1] = 서브 카테고리. 자유롭게.
+#  categories[0] = 메인. 아래 4개 중에서만.
+#  categories[1] = 서브. 자유롭게.
+#  카테고리를 추가하면 main.css 상단의 .badge 색도 추가하세요.
 # ─────────────────────────────────────────────
 main_categories:
-  - Detection    # 탐지 룰, 시그니처, 튜닝
-  - Analysis     # 침해 분석, 아티팩트, 리포트
-  - Operations   # 운영, 자동화, 인프라
-  - Notes        # 학습 정리, 메모
+  - Detection
+  - Analysis
+  - Operations
+  - Notes
 
 # ─────────────────────────────────────────────
 #  Build
@@ -60,9 +63,6 @@ kramdown:
   syntax_highlighter_opts:
     block:
       line_numbers: true
-
-sass:
-  style: compressed
 
 exclude:
   - Gemfile

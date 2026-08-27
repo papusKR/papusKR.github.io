@@ -4,6 +4,7 @@ date: 2026-02-11
 categories: [Analysis, Forensics]
 tags: [windows, eventlog, timeline, dfir]
 description: "계정 탈취 의심 건에서 로그온 이벤트만으로 침입 시점을 좁힌 과정."
+pinned: true
 ---
 
 더미 글입니다.
@@ -11,8 +12,8 @@ description: "계정 탈취 의심 건에서 로그온 이벤트만으로 침입
 ## 수집
 
 ```bash
-wevtutil epl Security C:\\evidence\\security.evtx
-wevtutil epl Microsoft-Windows-Sysmon/Operational C:\\evidence\\sysmon.evtx
+wevtutil epl Security C:\evidence\security.evtx
+wevtutil epl Microsoft-Windows-Sysmon/Operational C:\evidence\sysmon.evtx
 ```
 
 ## 파싱
@@ -22,8 +23,7 @@ import pandas as pd
 from evtx import PyEvtxParser
 
 parser = PyEvtxParser("security.evtx")
-rows = [r for r in parser.records_json()]
-df = pd.DataFrame(rows)
+df = pd.DataFrame([r for r in parser.records_json()])
 
 logons = df[df["event_id"].isin([4624, 4625, 4672])]
 logons.sort_values("timestamp").head(20)
