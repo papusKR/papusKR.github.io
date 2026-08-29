@@ -1,7 +1,7 @@
 ---
 layout: page
-title: 작업
-permalink: /portfolio/
+title: 실험실
+permalink: /lab/
 description: "다룰 수 있는 것과 직접 만든 것."
 ---
 

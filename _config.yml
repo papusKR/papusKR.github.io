@@ -25,16 +25,12 @@ linkedin_url: ""
 navigation:
   - name: "홈"
     link: "/"
-    icon: "home"
   - name: "기록"
     link: "/blog/"
-    icon: "doc"
   - name: "실험실"
     link: "/lab/"
-    icon: "work"
   - name: "소개"
     link: "/about/"
-    icon: "user"
 
 # ─────────────────────────────────────────────
 #  Taxonomy

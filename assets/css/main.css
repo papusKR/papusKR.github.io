@@ -95,9 +95,6 @@ img { max-width: 100%; height: auto; }
 .rail a:hover { color: var(--dim); }
 .rail a[aria-current="page"] { color: var(--text); font-weight: 500; }
 
-/* 데스크톱에서는 아이콘 숨김 */
-.rail .ico { display: none; }
-
 /* ═══════════════════════════════════════════
    FILTERS
    ═══════════════════════════════════════════ */
@@ -433,14 +430,8 @@ a.aside:hover { color: var(--text); }
   .rail .menu { flex: 1; justify-content: space-around; gap: 0; }
   .rail a {
     flex: 1; max-width: 76px; padding: 5px 0;
-    text-align: center; font-size: 9px;
+    text-align: center; font-size: 12px;
   }
-  .rail .ico { display: block; height: 18px; margin-bottom: 2px; }
-  .rail .ico svg {
-    width: 18px; height: 18px; stroke: currentColor; fill: none;
-    stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
-  }
-  .rail .lbl { font-size: 9px; line-height: 1.2; }
 
   .main { padding: 18px 0 56px; }
   .col, .doc { padding: 0 14px; }
