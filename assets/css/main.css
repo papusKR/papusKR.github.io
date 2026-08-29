@@ -20,7 +20,7 @@
           "Segoe UI", system-ui, sans-serif;
   --mono: "IBM Plex Mono", "SF Mono", Menlo, Consolas, monospace;
 
-  --col:  720px;
+  --col:  920px;
 }
 
 /* 카테고리 뱃지 색 — 카테고리를 늘리면 여기에 추가하세요 */
@@ -237,7 +237,7 @@ a.aside:hover { color: var(--text); }
 /* ═══════════════════════════════════════════
    ARTICLE — 목록과 달리 여백을 넉넉히
    ═══════════════════════════════════════════ */
-.doc { max-width: 660px; margin: 0 auto; padding: 0 20px; }
+.doc { max-width: 700px; margin: 0 auto; padding: 0 20px; }
 
 .doc-head { padding: 8px 0 22px; border-bottom: 1px solid var(--line); margin-bottom: 30px; }
 .doc-head h1 {
