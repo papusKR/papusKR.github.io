@@ -1,7 +1,7 @@
 ---
 title: "ATT&CK 매핑을 시작할 때 헷갈렸던 것들 (블로그 테스트용 글)"
 date: 2026-01-29
-categories: [Notes, MITRE]
+categories: [보안]
 tags: [attack, mitre, mapping, detection]
 description: "Tactic과 Technique을 처음에 자꾸 뒤집어 생각했던 기록."
 ---

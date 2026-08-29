@@ -1,7 +1,7 @@
 ---
 title: "윈도우 이벤트 로그로 타임라인 재구성하기 (블로그 테스트용 글)"
 date: 2026-02-11
-categories: [Analysis, Forensics]
+categories: [보안]
 tags: [windows, eventlog, timeline, dfir]
 description: "계정 탈취 의심 건에서 로그온 이벤트만으로 침입 시점을 좁힌 과정."
 pinned: true

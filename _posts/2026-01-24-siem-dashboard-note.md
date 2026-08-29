@@ -1,7 +1,7 @@
 ---
 title: "SIEM 대시보드에 뭘 올릴지 정하는 문제 (블로그 테스트용 글)"
 date: 2026-01-24
-categories: [Notes, SIEM]
+categories: [보안]
 tags: [siem, dashboard, monitoring]
 description: "그래프를 열두 개 올렸다가 세 개로 줄인 과정."
 ---

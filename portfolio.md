@@ -51,7 +51,7 @@ description: "다룰 수 있는 것과 직접 만든 것."
 ## 프로젝트
 
 <div class="block" markdown="0">
-  <span class="badge" data-c="Detection">Detection</span>
+  <span class="badge" data-c="보안">보안</span>
   <h3>프로젝트 제목</h3>
   <p>한 문장으로 무엇을 왜 만들었는지. 문제 상황부터 쓰면 읽힙니다.</p>
   <ul>
@@ -63,7 +63,7 @@ description: "다룰 수 있는 것과 직접 만든 것."
 </div>
 
 <div class="block" markdown="0">
-  <span class="badge" data-c="Analysis">Analysis</span>
+  <span class="badge" data-c="보안">보안</span>
   <h3>두 번째 프로젝트</h3>
   <p>홈랩에서 공격을 재현하고 분석한 케이스가 있으면 이 자리에.</p>
   <ul>
@@ -75,7 +75,7 @@ description: "다룰 수 있는 것과 직접 만든 것."
 </div>
 
 <div class="block" markdown="0">
-  <span class="badge" data-c="Operations">Operations</span>
+  <span class="badge" data-c="네트워크">네트워크</span>
   <h3>세 번째 프로젝트</h3>
   <p>반복 업무를 줄인 자동화가 있으면 여기에. 절약한 시간을 적으세요.</p>
   <div class="chips"><span>Python</span><span>REST API</span><span>Slack</span></div>

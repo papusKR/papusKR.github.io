@@ -1,7 +1,7 @@
 ---
 title: "IOC 조회 자동화 스크립트 (블로그 테스트용 글)"
 date: 2026-02-03
-categories: [Operations, Automation]
+categories: [보안]
 tags: [python, ioc, api, automation]
 description: "의심 IP 하나 확인하는 데 매번 사이트 여러 곳을 여는 게 비효율적이라 만든 것."
 ---

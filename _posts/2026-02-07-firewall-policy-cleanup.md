@@ -1,7 +1,7 @@
 ---
 title: "방화벽 정책 정리 작업 기록 (블로그 테스트용 글)"
 date: 2026-02-07
-categories: [Operations, Firewall]
+categories: [네트워크]
 tags: [firewall, policy, iptables, audit]
 description: "쓰지 않는 규칙 400개를 걷어내면서 세운 기준과, 지우다 사고 날 뻔한 이야기."
 ---

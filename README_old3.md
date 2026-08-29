@@ -24,17 +24,16 @@ _posts/              글
 ---
 title: "제목"
 date: 2026-02-08
-categories: [보안]
+categories: [Detection, Sigma]
 tags: [sigma, siem]
 description: "목록에 나오는 한 줄 요약."
 pinned: true      # 홈 상단 고정. 생략 가능.
 ---
 ```
 
-- `categories[0]` 은 **보안 / 네트워크 / 클라우드 / AI** 중 하나만 사용합니다.
+- `categories[0]` 은 **Detection / Analysis / Operations / Notes** 중 하나만 사용합니다.
   블로그 페이지의 상단 탭이 됩니다.
-- `categories[1]` 은 선택입니다. 넣으면 탭 아래 알약 필터가 자동 생성됩니다.
-  필요해질 때 글에 바로 쓰면 되고, 미리 등록할 필요는 없습니다.
+- `categories[1]` 은 자유롭게 씁니다. 탭 아래 알약 필터가 됩니다.
 - 본문에 `# 제목` 을 다시 쓰지 않습니다. 레이아웃이 이미 출력합니다.
 - `pinned: true` 는 홈 상단에 최대 2개까지 표시됩니다.
 

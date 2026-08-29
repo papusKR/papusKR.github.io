@@ -24,10 +24,10 @@
 }
 
 /* 카테고리 뱃지 색 — 카테고리를 늘리면 여기에 추가하세요 */
-.badge[data-c="Detection"]  { background: #1E3A2B; color: #6FCF97; }
-.badge[data-c="Analysis"]   { background: #1E2F3A; color: #6FB4CF; }
-.badge[data-c="Operations"] { background: #3A2E1E; color: #CFA96F; }
-.badge[data-c="Notes"]      { background: #2C2D32; color: #A8AAB0; }
+.badge[data-c="보안"]     { background: #1E3A2B; color: #6FCF97; }
+.badge[data-c="네트워크"] { background: #1E2F3A; color: #6FB4CF; }
+.badge[data-c="클라우드"] { background: #3A2E1E; color: #CFA96F; }
+.badge[data-c="AI"]       { background: #322A3A; color: #B49BCF; }
 
 /* ═══════════════════════════════════════════
    BASE

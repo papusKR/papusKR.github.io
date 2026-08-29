@@ -1,7 +1,7 @@
 ---
 title: "Sigma 룰 오탐 튜닝 기록 (블로그 테스트용 글)"
 date: 2026-02-14
-categories: [Detection, Sigma]
+categories: [보안]
 tags: [sigma, siem, tuning, attack]
 description: "PowerShell 인코딩 명령 탐지 룰이 하루 200건씩 울려서, 정탐만 남기기까지 한 일."
 pinned: true
