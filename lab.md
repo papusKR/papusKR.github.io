@@ -2,89 +2,62 @@
 layout: page
 title: 실험실
 permalink: /lab/
-description: "다룰 수 있는 것과 직접 만든 것."
+description: "직접 만들고 돌려본 것들."
 ---
 
-<p style="font-size:13px;color:#6B6D72;margin:0 0 26px">
-이 페이지는 뼈대입니다. <code>portfolio.md</code> 를 열어 실제 내용으로 바꾸세요.
+<p style="font-size:13px;color:#6B6D72;margin:0 0 30px">
+구축 중입니다. 홈랩을 세우고 실험을 하나씩 채워 나갈 예정입니다.
 </p>
 
-## 역량
+## 환경
 
-<div class="duo" markdown="0">
-  <div class="block">
-    <h4>Detection</h4>
-    <ul>
-      <li>Sigma 룰 작성 · 변환</li>
-      <li>MITRE ATT&amp;CK 매핑</li>
-      <li>오탐 튜닝 · 커버리지 점검</li>
-    </ul>
-  </div>
-  <div class="block">
-    <h4>Incident Response</h4>
-    <ul>
-      <li>로그 상관 분석</li>
-      <li>타임라인 재구성</li>
-      <li>침해사고 리포트</li>
-    </ul>
-  </div>
-</div>
-<div class="duo" markdown="0">
-  <div class="block">
-    <h4>Operations</h4>
-    <ul>
-      <li>SIEM 운영 · 대시보드</li>
-      <li>방화벽 · IDS/IPS 정책</li>
-      <li>알람 트리아지</li>
-    </ul>
-  </div>
-  <div class="block">
-    <h4>Automation</h4>
-    <ul>
-      <li>Python 로그 파싱</li>
-      <li>IOC 조회 자동화</li>
-      <li>리포트 생성</li>
-    </ul>
-  </div>
+<div class="block" markdown="0">
+  <p style="margin:0;color:#6B6D72;font-size:13.5px">
+    준비 중. 구성이 잡히면 VM 구성, 네트워크 대역, 설치 항목을 여기에 정리합니다.
+  </p>
 </div>
 
-## 프로젝트
+<!--
+구축 후 아래 형태로 채우세요.
+
+<div class="block" markdown="0">
+  <h3>홈랩 구성</h3>
+  <ul>
+    <li><strong>Kali</strong> — 공격 재현</li>
+    <li><strong>Ubuntu</strong> — 대상 서버, 로그 수집</li>
+    <li><strong>네트워크</strong> — Host-only 격리</li>
+  </ul>
+  <div class="chips"><span>VMware</span><span>Docker</span><span>ELK</span></div>
+</div>
+-->
+
+## 실험
+
+<div class="block" markdown="0">
+  <p style="margin:0;color:#6B6D72;font-size:13.5px">
+    아직 없습니다. 실험을 하나 마칠 때마다 여기에 항목을 추가하고,
+    자세한 과정은 <a href="{{ '/blog/' | relative_url }}">기록</a>에 글로 남깁니다.
+  </p>
+</div>
+
+<!--
+실험 하나당 아래 형태로 추가하세요.
 
 <div class="block" markdown="0">
   <span class="badge" data-c="보안">보안</span>
-  <h3>프로젝트 제목</h3>
-  <p>한 문장으로 무엇을 왜 만들었는지. 문제 상황부터 쓰면 읽힙니다.</p>
-  <ul>
-    <li><strong>문제</strong> — 어떤 상황이 반복됐는지</li>
-    <li><strong>접근</strong> — 무엇을 어떻게 했는지</li>
-    <li><strong>결과</strong> — 숫자로 쓸 수 있으면 숫자로</li>
-  </ul>
-  <div class="chips"><span>Sigma</span><span>Splunk</span><span>Python</span></div>
+  <h3>nmap 스캔 유형별 로그 비교</h3>
+  <p>SYN · Connect · NULL 스캔을 각각 실행하고 방화벽 로그와 패킷 캡처에
+     무엇이 다르게 남는지 정리했습니다.</p>
+  <div class="chips"><span>nmap</span><span>iptables</span><span>tcpdump</span></div>
+</div>
+-->
+
+## 도구
+
+<div class="chips" markdown="0">
+  <span>nmap</span><span>Wireshark</span><span>tcpdump</span><span>Suricata</span><span>ELK</span><span>Sigma</span>
 </div>
 
-<div class="block" markdown="0">
-  <span class="badge" data-c="보안">보안</span>
-  <h3>두 번째 프로젝트</h3>
-  <p>홈랩에서 공격을 재현하고 분석한 케이스가 있으면 이 자리에.</p>
-  <ul>
-    <li><strong>환경</strong> — 어떻게 구성했는지</li>
-    <li><strong>재현</strong> — 어떤 공격을 어떻게</li>
-    <li><strong>탐지</strong> — 어떤 아티팩트가 남았는지</li>
-  </ul>
-  <div class="chips"><span>Sysmon</span><span>ELK</span><span>ATT&amp;CK</span></div>
-</div>
-
-<div class="block" markdown="0">
-  <span class="badge" data-c="네트워크">네트워크</span>
-  <h3>세 번째 프로젝트</h3>
-  <p>반복 업무를 줄인 자동화가 있으면 여기에. 절약한 시간을 적으세요.</p>
-  <div class="chips"><span>Python</span><span>REST API</span><span>Slack</span></div>
-</div>
-
-## 자격
-
-| 항목 | 상태 |
-|---|---|
-| 정보처리기사 | — |
-| 정보보안기사 | — |
-| 기타 | — |
+<p style="font-size:13px;color:#6B6D72;margin:14px 0 0">
+실제로 쓰는 것만 남기고 나머지는 지우세요.
+</p>
