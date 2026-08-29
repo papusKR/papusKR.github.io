@@ -1,5 +1,5 @@
 ---
-title: "ATT&CK 매핑을 시작할 때 헷갈렸던 것들"
+title: "ATT&CK 매핑을 시작할 때 헷갈렸던 것들 (블로그 테스트용 글)"
 date: 2026-01-29
 categories: [Notes, MITRE]
 tags: [attack, mitre, mapping, detection]

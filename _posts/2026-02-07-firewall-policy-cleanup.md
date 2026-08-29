@@ -1,5 +1,5 @@
 ---
-title: "방화벽 정책 정리 작업 기록"
+title: "방화벽 정책 정리 작업 기록 (블로그 테스트용 글)"
 date: 2026-02-07
 categories: [Operations, Firewall]
 tags: [firewall, policy, iptables, audit]

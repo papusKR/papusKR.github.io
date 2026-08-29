@@ -1,5 +1,5 @@
 ---
-title: "IOC 조회 자동화 스크립트"
+title: "IOC 조회 자동화 스크립트 (블로그 테스트용 글)"
 date: 2026-02-03
 categories: [Operations, Automation]
 tags: [python, ioc, api, automation]
