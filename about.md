@@ -83,4 +83,4 @@ description: "무엇을 하는 사람이고 어디로 가려는지."
 {% if site.email and site.email != "" %}- Email — [{{ site.email }}](mailto:{{ site.email }})
 {% endif %}{% if site.github_user and site.github_user != "" %}- GitHub — [github.com/{{ site.github_user }}](https://github.com/{{ site.github_user }})
 {% endif %}{% if site.linkedin_url and site.linkedin_url != "" %}- LinkedIn — [프로필]({{ site.linkedin_url }})
-{% endif %}- RSS — [feed.xml]({{ '/feed.xml' | relative_url }})
+{% endif %}
