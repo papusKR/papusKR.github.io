@@ -2,7 +2,7 @@
 layout: page
 title: 소개
 permalink: /about/
-description: "무엇을 하는 사람이고 어디로 가려는지."
+description: "외양간을 고치는 사람이 되고자 합니다. 소를 잃기 전에 외양간을 고치듯, 자산을 잃기 전에 공격을 분석하고 실험하고 기록합니다."
 ---
 
 <div class="face" markdown="0">
@@ -11,7 +11,6 @@ description: "무엇을 하는 사람이고 어디로 가려는지."
   <div>
     <p class="nm">{{ site.name }}</p>
     <p class="rl">{{ site.role }}</p>
-    <p class="tg">{{ site.tagline }}</p>
   </div>
 </div>
 
